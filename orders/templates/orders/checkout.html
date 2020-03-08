@@ -1,0 +1,25 @@
+{% extends 'products/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="content-section">
+	<div class="row">
+		<div class="col-md-8">
+			<h4>display available addredd</h4>
+			<p>{{object.name}}</p>
+			<p>{{object.phone_num}}</p>
+			<p>{{object.address1}}</p>
+			<p>{{object.address2}}</p>
+			<p>{{object.city}}</p>
+			<p>{{object.state}}</p>
+			<p>{{object.pincode}}</p><hr>
+			
+
+
+			<a class="btn btn-outline-info" href="{% url 'delivery_address' %}">Deliver To This Address</a>
+			<a class="btn btn-outline-info" href="{% url 'update_address' %}">Add New Address</a>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

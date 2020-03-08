@@ -1,0 +1,93 @@
+{% extends 'products/base.html' %}
+
+  {% block content %}
+
+<main >
+    <div class="container dark-grey-text mt-5">
+
+      <!--Grid row-->
+  <h2 class="mb-4">Deatils of products</h2>
+
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-12 mb-4">
+
+          <img src="{{object.image.url}}" class="col-md-12" alt="">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+          <!--Content-->
+          <div class="p-4">
+
+            <div class="mb-3">
+              <a href="">
+                <span class="badge purple mr-1">{{object.category.name}}</span>
+              </a>
+              <a href="">
+                <span class="badge blue mr-1">New</span>
+              </a>
+              <a href="">
+                <span class="badge red mr-1">Bestseller</span>
+              </a>
+            </div>
+
+            <p class="lead">
+              <span class="mr-1">
+                <del>Price</del>
+              </span>
+              <span>rs.{{object.price}}</span>
+            </p>
+
+            <p class="lead font-weight-bold">Description</p>
+
+            <p>{{object.description}}</p>
+
+            <form action='{% url "cart_update"  %}' method="GET" class="d-flex justify-content-left">
+              <span class="a-button-text a-declarative mr-2 mt-1" data-action="a-dropdown-button" role="button" aria-hidden="true">Qty:<span class="sc-offscreen-label" aria-label="Quantity"></span></span></span>
+              <!-- Default input -->
+              <input type="number" name="product_id" value='{{ product.id }}' aria-label="Search" class="form-control" style="width: 100px" min="1" max="10">
+              <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
+                <i class="fas fa-shopping-cart ml-1"></i>
+
+              </button>
+
+            </form>
+            <!-- <form method="GET" action=" %}">
+                    <input class="col-sm-5" name='qty' type="number"  value="1" min="1" max="10">
+                    <input type="submit" value="Add to Cart"> 
+                  </form> -->
+          </div>
+          <!--Content-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <hr>
+
+      
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+ 
+
+    <!--Call to action-->
+    
+    <!--/.Call to action-->
+
+    <hr class="my-4">
+
+  
+    
+
+  {% endblock %}
+    

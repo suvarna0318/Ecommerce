@@ -1,0 +1,49 @@
+
+{% extends 'products/base.html' %}
+{% block content %}
+
+
+
+<h2>cart items</h2>
+
+
+<div class="row">
+  <div class="col-offset-2 col-md-10">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Price</th>
+      <th scope="col">Qty</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for prod in products %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      
+      <td>{{prod.title}}</td>
+      <td>{{prod.price}}</td>
+      <td><a href=""><i class="fa fa-minus mr-2" aria-hidden="true"></i></a>{{cart.qty}}<a href=""><i class="fa fa-plus ml-2" aria-hidden="true"></i></a></td>
+      <td>{% include 'cart/remove.html' with product=prod cart=cart %}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <th></th>
+      <th></th>
+      <th>Total:{{cart.total}}</th>
+      <th></th>
+    </tr>
+    
+  </tbody>
+</table>
+</div>
+</div>
+
+
+
+<a href='{% url "checkout" %}' class="btn btn-success">Continue</a>
+
+</div>
+{% endblock %}

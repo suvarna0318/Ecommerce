@@ -1,0 +1,10 @@
+<div class="card" style="width: 12rem;height:22rem;">
+  <img class="card-img-top" style="width: 12rem;height:12rem;"src="{{instance.image.url}}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{instance.title}}</h5>
+    <h5 class="card-title">{{instance.price}}</h5>
+   
+    <a href="{% url 'detail' instance.id %}" class="btn btn-primary">View</a>
+   
+  </div>
+</div>
