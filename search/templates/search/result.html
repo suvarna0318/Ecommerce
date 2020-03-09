@@ -1,0 +1,17 @@
+{% extends 'products/base.html' %}
+
+  {% block content %}
+ 
+    <h1 class="text-center"> search result Page</h1><hr>
+    <div class="conatiner">
+    <div class="row">
+
+
+  {% for item in object_list %}
+  <div class="mr-4">
+ {% include 'products/card.html'  with instance=item%}
+</div>
+  {% endfor %}
+
+    </div>
+    {% endblock %}

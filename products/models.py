@@ -1,5 +1,6 @@
 from django.db import models
 from PIL import Image
+from django.db.models import Q
 
 # Create your models here.
 s_choices={
@@ -14,7 +15,9 @@ class Category(models.Model):
 	def __str__(self):
 		return self.name
 class ProductManager(models.Manager):
-	pass
+	def search(self, query):
+		lookups=(Q(title__icontains=query)|Q(description__icontains=query)|Q(price__icontains=query))              
+		return self.model.objects.filter(lookups)
 
 class Product(models.Model):
 	title=models.CharField(max_length=200)
