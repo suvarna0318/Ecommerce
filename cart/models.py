@@ -5,9 +5,19 @@ from django.db.models.signals import m2m_changed,pre_save
 
 # Create your models here.
 class CartManager(models.Manager):
+
+	def new(self,user=None):
+		user_obj=None
+		if user is not None and user.is_authenticated():
+			user_obj=user
+		return self.model.objects.create(user=user_obj)
+
+
 	def new_or_get(self,request):
 		cart_id=request.session.get('cart_id',None)
-		# print(cart_id)
+		print(cart_id)
+		new_obj=None
+		cart_obj=None
 		if cart_id is  None:
 			# print("created new one")
 			new_obj=True
@@ -21,14 +31,13 @@ class CartManager(models.Manager):
 				cart_obj.save()
 		return cart_obj,new_obj
 
-	def new(self,user=None):
-		user_obj=None
-		if user is not None and user.is_authenticated():
-			user_obj=user
-		return self.model.objects.create(user=user_obj)
+	
+			
+
+
 
 	
-
+	
 
 class Cart(models.Model):
 	products=models.ManyToManyField(Product,null=True,blank=True)

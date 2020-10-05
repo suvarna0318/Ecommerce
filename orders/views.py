@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import Order
+from django.shortcuts import render,redirect
+from .models import Order,PromoCode
 from cart.models import Cart
 from users.models import Address
 from users.forms import AddressForm
@@ -7,7 +7,33 @@ from django.contrib.auth.decorators import login_required
 import stripe
 from django.conf import settings
 from django.contrib import messages
-stripe.api_key=settings.STRIPE_SECRET_KEY
+stripe.api_key='sk_test_B3Z1YvMT6Ve2uDSWFnjVNEod00OXtlkHa8'
+
+
+
+def coupen_apply(request):
+    code=request.POST.get('code')
+    print(code)
+    try:
+        coupen_obj=PromoCode.objects.filter(code=code)
+        print("exist",coupen_obj)
+    except:
+        print("not exist")
+
+    if coupen_obj.count()<1:
+        coupen_obj=PromoCode.objects.create(code=code)
+        messages.success(request,'Applied')
+        amt=100
+        return redirect('/cart/cart-home')
+    else:
+        # coupen_obj=PromoCode.objects.filter(num=code,user=request.user)
+        # # code_add.num=code
+        # # code_add.save()
+        messages.warning(request,'Enter Correct Code')
+        print("already applied")
+
+
+    return redirect('/cart/cart-home')
 
 @login_required
 def checkout(request):
@@ -25,21 +51,7 @@ def checkout(request):
     'object':add_obj,
     }
     return render(request,'orders/checkout.html',context)
-    # if request.method=='POST':
-    #     form=AddressForm(request.POST)
-    #     if form.is_valid() and user.is_auhtenticated():
-    #         print("address available")
-    # try:
-
-    #     get_address=Address.objects.get(user=request.user)
-    # except:
-    #     print("add address")
-    # context={
-    # 'api_key':stripe.api_key,
-    # 'get_address':get_address,
-    # 'form':form,
-    # }
-    # return render(request,'orders/checkout.html',context)
+    
 
 
 def update_address(request):
@@ -90,27 +102,41 @@ def update_address(request):
     return render(request,'orders/update_address.html',context)
 
 def delivery_address(request):
-    context={
-    'api_key':stripe.api_key,
-    }
-    return render(request,"orders/payment.html",context)
+    # context={
+    # 'api_key':stripe.api_key,
+    # }
+    return render(request,"orders/payment.html")
         
 def payment(request):
     if request.method=='POST':
+        print('Data:', request.POST)
         print(request.POST['stripeToken'])
+
+        customer=stripe.Customer.create(
+            
+            source=request.POST['stripeToken']
+        )
         charge=stripe.Charge.create(
+            customer=customer,
             amount=1000*100,
             currency='usd',
-            source=request.POST['stripeToken']
+            # source=request.POST['stripeToken']
 
         )
-        print("worked")
+
+        messages.success(request,'Payment Successful!')
         # send_mail("Ecommerce order","you have ordered the product",
         #     'suvarna0318@gmail.com',
         #     ['ambruth.n84@gmail.com'],fail_silently=False)
 
         return render(request,'orders/payment_done.html',context={})
 
+def cash_on_delivery(request):
+    if request.method == "POST":
+        radoption = str(request.POST["radoption"])
+    print(radoption)
+    messages.success(request,'Your Order has been placed by cash on delivery')
 
+    return render(request,'orders/payment_done.html',context={'cash':"cash payment",})
 
 

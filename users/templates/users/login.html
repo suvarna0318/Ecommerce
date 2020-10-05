@@ -1,23 +1,33 @@
-{% extends 'products/base.html' %}
+{% extends 'products/header.html' %}
 {% load crispy_forms_tags %}
-{% block content %}
-<div class="content-section">
-	<div class="row">
-		<div class="col-md-8">
-<form method='POST' action=''>
-{% csrf_token %}
-<legend>
-	<fieldset>Login Here</fieldset>
-	{{form|crispy}}
-</legend>
-<div class="form-group">
-	<button class="btn btn-outline-info">Sign In</button>
-</div>
-
-</form>Need  an account ?<a href="{% url 'register' %}">Register</a></p>
+{% load static %}
+{% block main %}
+<div class="content-section ">
+	<div class="row mt-0">
+		<div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img class="product__details__pic__item--large"
+                                src="{% static 'img/login_img1.jpg' %}" alt="">
+                        </div>
+                    </div>
+        </div>
+		<div class="col-lg-6 col-md-6">
+			<form method='POST' action="{% url 'login' %}">
+				{% csrf_token %}
+				<legend>
+				<fieldset class="mb-5">Sign In</fieldset>
+				{{form|crispy}}
+				</legend>
+				<div class="form-group">
+					<button class="btn btn-outline-info">Sign In</button>
+				</div>
+			</form>
+			Need  an account ?<a href="{% url 'register' %}">Register</a></p>
 <a href="{% url 'password_reset' %}">Forget Password ?</a>
 </div>
 </div>
 </div>
 </div>
+
 {% endblock %}

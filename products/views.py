@@ -3,10 +3,13 @@ from django.views.generic import ListView,DetailView
 from .models import Product
 from django.core.paginator import Paginator
 
+
+def home(request):
+	return render(request,'products/home.html')
 # Create your views here.
 class ProductListView(ListView):
 	model=Product
-	template_name='products/product_home.html'
+	template_name='products/shop-grid.html'
 	context_object_name='items'
 	paginate_by = 4
 
@@ -16,7 +19,7 @@ class ProductListView(ListView):
 
 class ProductDetailView(DetailView):
 	model=Product
-	template_name='products/detail.html'
+	template_name='products/shop-details.html'
 
 	def get_context_data(self,*args,**kwargs):
 		context=super(ProductDetailView,self).get_context_data(*args,**kwargs)

@@ -53,6 +53,8 @@ def pre_save_order_total_receiver(sender,instance,*args,**kwargs):
 pre_save.connect(pre_save_order_total_receiver,sender=Order)
 
 
-
+class PromoCode(models.Model):
+    code = models.CharField(max_length=15)
+      
 
 
