@@ -1,0 +1,41 @@
+{% extends 'products/header.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block main %}
+<style type="text/css">
+
+.login-cls:hover{
+	color: green;
+}
+
+
+</style>
+<div class="content-section ">
+	<div class="row mt-0">
+		<div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img class="product__details__pic__item--large"
+                                src="{% static 'img/login_img1.jpg' %}" alt="">
+                        </div>
+                    </div>
+        </div>
+		<div class="col-lg-6 col-md-6 ">
+			<form method='POST' action="{% url 'login' %}">
+				{% csrf_token %}
+				<legend>
+				<fieldset class="mb-5">Sign In</fieldset>
+				{{form|crispy}}
+				</legend>
+				<div class="form-group">
+					<div><button class="btn btn-outline-info">Sign In</button></div>
+				</div>
+			</form>
+			Need  an account ?<a href="{% url 'register' %}" class="login-cls">Register</a><br>
+<a href="{% url 'password_reset' %}" class="login-cls">Forget Password ?</a>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

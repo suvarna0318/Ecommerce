@@ -1,0 +1,24 @@
+{% extends 'products/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style type="text/css">
+.login-cls{
+	color: black;
+	margin-top: 50px;
+}
+a:hover{
+	color: blue;
+}
+</style>
+
+</style>
+<div class="row mt-4">
+	<div class="content-section offset-2 col-lg-6 col-sm-6 ">
+		<p class="mb-4">Do you Want To Login Again <br>
+		<a  href="{% url 'login' %} " class="login-cls " >Login</a></p>
+
+	</div>
+</div>
+
+{% endblock %}

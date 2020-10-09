@@ -1,0 +1,112 @@
+{% extends 'products/index.html' %}
+{% load static %}
+  {% block slider %}
+
+  <section class="categories">
+        <div class="container">
+            
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-6.jpg' %}">
+                            <h5>
+                                <a href="{% url 'show_category_product' name='Fresh fruits' %}">Fresh Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-2.jpg' %}">
+                            <h5><a href="{% url 'show_category_product' name='Dried Fruit' %}">Dried Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-3.jpg' %}">
+                            <h5><a href="{% url 'show_category_product' name='Vegetables' %}">Vegetables</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-4.jpg' %}">
+                            <h5><a href="{% url 'show_category_product' name='Beverages' %}">Beverages</a></h5>
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/baby c2.jpg' %}">
+                            <h5><a href="{% url 'show_category_product' name='Baby Care' %}">Baby Care</a></h5>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+  </section>
+  <div class="banner mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <a href="{% url 'show_category_product' name='Fresh fruits' %}">
+                        <img src="{% static 'img/banner/banner-1.jpg' %}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <a href="{% url 'show_category_product' name='Beverages' %}">
+                    <div class="banner__pic">
+                        <img src="{% static 'img/banner/banner-2.jpg' %}" alt="">
+                    </div>
+                </a>
+                </div>
+            </div>
+        </div>
+  </div>
+  <div class="banner mt-5 mb-5">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="banner__pic" style="width:100%;">
+                        <a href="{% url 'show_category_product' name='bathroom cleaning' %}">
+                        <img src="{% static 'img/banner/banner-5.jpg' %}" alt="">
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+  </div>
+   <!-- <section class="categories mt-5 mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-1.jpg' %}">
+                            <h5>
+                                <a href="{% url 'show_category_product' name='Fresh fruits' %}">Fresh Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-2.jpg' %}">
+                            <h5><a href="{% url 'show_category_product' name='Dried Fruit' %}">Dried Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-3.jpg' %}">
+                            <h5><a href="{% url 'show_category_product' name='Vegetables' %}">Vegetables</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-4.jpg' %}">
+                            <h5><a href="{% url 'show_category_product' name='Beverages' %}">drink fruits</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-5.jpg' %}">
+                            <h5><a href="{% url 'show_category_product' name='Baby Care' %}">Baby Care</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </section> -->
+  
+    {% include 'products/footer.html' %}
+  {% endblock %}
+  

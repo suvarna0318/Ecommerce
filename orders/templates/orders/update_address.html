@@ -1,0 +1,22 @@
+{% extends 'products/header.html'  %}
+{% load crispy_forms_tags %}
+{% block main %}
+<div class="container">
+<div class="row">
+<div class="col-md-6">
+<form method='POST' action='{% url "update_address" %}'>
+{% csrf_token %}
+<legend>
+	<fieldset>Add a new address </fieldset>
+	{{form|crispy}}
+</legend>
+	<div class="form-group">
+		<button class="btn btn-outline-info" type="submit">Add New Address</button>
+	</div>
+
+</form>
+
+</div>
+</div>
+</div>
+{% endblock %}

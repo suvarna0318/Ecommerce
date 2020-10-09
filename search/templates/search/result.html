@@ -1,0 +1,105 @@
+{% extends 'products/index.html' %}
+
+  {% block main %}
+ 
+    <h5 class="text-center mb-2"> search result :</h5>
+    <div class="conatiner">
+    	<div class="row">
+
+    		<div class="col-lg-3 col-md-3">
+                    
+                </div>
+ 
+				<div class="col-lg-9 col-md-7">
+                  
+                    <div class="filter__item">
+
+                        <div class="row">
+
+                            <div class="col-lg-4 col-md-5">
+                                <div class="filter__sort">
+                                    <span style="font-weight:bold;">All Products</span>
+                                    
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                       
+                    <div class="row">
+                    {%  if items %}
+                        {% for item in items %}
+                    
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+
+                            <div class="product__item" >
+                                <a href="{% url 'detail' item.id %}">
+                                	<div class="product__item__pic set-bg " 
+                                	data-setbg="{{item.image.url}}" style="width:200px;height:200px;">
+                            	</a>
+                                <ul class="product__item__pic__hover">
+                                    <li><a href="{% url 'detail' item.id %}"><i class="fa fa-info-circle"></i></a></li>
+                                       
+                                    <li><a href="{% url 'cart:cart-update' item.id %}"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                       	    </div>
+
+                                <div class="product__item__text mr-5" >
+                                  
+                                    <h6><a href="#">{{item.title}} {{item.qty}}</a></h6>
+                                    
+                                    <h5>₹{{item.price}}</h5>
+                                    
+
+                                </div>
+                            </div>
+                            {% cycle '' '' '' %}<br>
+                        </div>
+                    </a>
+                        {% endfor %}
+                        {% else %}
+                            
+
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <p>Stay tunned,we will update soon</h6>
+                            <div class="shoping__cart__btns">
+
+                                <a href="{% url 'products' %}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="product__pagination">
+                    {% if is_paginated %}
+                        {% if page_obj.has_previous %}
+                            <a  href="?page={{page_obj.previous_page_number}}"><<</a>
+                        {%endif%} 
+
+                        {% for num in page_obj.paginator.page_range%}
+                        {% if page_obj.number == num %}
+                            <a  href="?page={{num}}"  class="btn btn-info p-1">{{num}}</a>
+                        {% elif num > page_obj.number|add:'-3' and num < pge_obj.number|add:'3' %}
+                            <a  href="?page={{num}}" class="btn btn-outline-info">{{num}}</a>
+                        {%endif%}
+                        {%endfor%}
+
+                        {% if page_obj.has_next %}
+                            <a  href="?page={{page_obj.next_page_number}}">>></a>
+
+                        {% endif%}     
+                    {% endif %}
+
+                    </div>
+            
+                </div>
+
+
+
+
+
+
+    </div>
+    {% endblock %}

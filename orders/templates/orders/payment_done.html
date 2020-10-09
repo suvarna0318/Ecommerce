@@ -1,0 +1,14 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% block content %}
+
+{% if cash %}
+<div class="offset-3 col-lg-6" >
+	<img src="{% static 'img/cod1.jpg' %}">
+</div>
+{% else %}
+<div class="offset-3 col-lg-6" >
+	<img src="{% static 'img/correct.jpg' %}">
+</div>
+{% endif %}
+{% endblock content %}
