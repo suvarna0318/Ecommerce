@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'x$x(e##_2_kraltt5_==bw_@$=nbho$_oa9#*dhk6ibio=vuvz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['apna-grocery-1.herokuapp.com','127.0.0.1:8000']
+ALLOWED_HOSTS = ['apna-grocery-1.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -148,3 +149,4 @@ IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 # STRIPE_SECRET_KEY='sk_test_51HYuvnJiWC4zUCzQkT8th2jyyJTae0LbDfNEZp203OqrBJa0R1LQm4xWq2QGVS67lmqVUmMa1VQR3YU1pbfHMvq0005QwA75X2'
 # STRIPE_PUBLISHABLE_KEY='pk_test_51HYuvnJiWC4zUCzQU7slNKm6xMtqkyNXNIu3wocpPlYSBxR9s3IhJ2u86iMxrFdMx3MN7pad6QVEg5LPIYVrkKyz00GXme9yjL'
+django_heroku.settings(locals())
