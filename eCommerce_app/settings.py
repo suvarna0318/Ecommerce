@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'users.apps.UsersConfig',
     'search.apps.SearchConfig',
-    # 'import_export',
+   
     
 ]
 
