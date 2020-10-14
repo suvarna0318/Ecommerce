@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
+import socket
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,11 +25,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'x$x(e##_2_kraltt5_==bw_@$=nbho$_oa9#*dhk6ibio=vuvz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# DEBUG = False
 
-ALLOWED_HOSTS = ['apna-grocery-1.herokuapp.com']
+# ALLOWED_HOSTS = ['apna-grocery-1.herokuapp.com']
 
 
+
+if socket.gethostname() == "server_name":
+    DEBUG = False
+    ALLOWED_HOSTS = ["apna-grocery-1.herokuapp.com",]
+    ...
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1",]
 # Application definition
 
 INSTALLED_APPS = [
@@ -149,27 +158,3 @@ EMAIL_HOST_PASSWORD='portfolio@123'
 # STRIPE_SECRET_KEY='sk_test_51HYuvnJiWC4zUCzQkT8th2jyyJTae0LbDfNEZp203OqrBJa0R1LQm4xWq2QGVS67lmqVUmMa1VQR3YU1pbfHMvq0005QwA75X2'
 # STRIPE_PUBLISHABLE_KEY='pk_test_51HYuvnJiWC4zUCzQU7slNKm6xMtqkyNXNIu3wocpPlYSBxR9s3IhJ2u86iMxrFdMx3MN7pad6QVEg5LPIYVrkKyz00GXme9yjL'
 django_heroku.settings(locals())
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    }
-}
