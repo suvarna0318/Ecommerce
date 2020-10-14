@@ -26,7 +26,7 @@ SECRET_KEY = 'x$x(e##_2_kraltt5_==bw_@$=nbho$_oa9#*dhk6ibio=vuvz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['apna-grocery-1.herokuapp.com']
 
 
 # Application definition
