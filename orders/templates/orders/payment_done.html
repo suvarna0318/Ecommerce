@@ -5,10 +5,17 @@
 {% if cash %}
 <div class="offset-3 col-lg-6" >
 	<img src="{% static 'img/cod1.jpg' %}">
+
+	<button><a href="{% url 'products' %}" class="primary-btn cart-btn">CONTINUE SHOPPING</a></button>
 </div>
 {% else %}
 <div class="offset-3 col-lg-6" >
 	<img src="{% static 'img/correct.jpg' %}">
+	<br>
+	<br>
+	<br>
+    <a href="{% url 'products' %}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                        
 </div>
 {% endif %}
 {% endblock content %}

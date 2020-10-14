@@ -74,7 +74,7 @@ def cart_update(request,id):
 				
 	request.session['total_item']=cart_obj.products.count()
 	print("cart-update 2:",cart_obj)
-	return redirect('/cart/cart-home')
+	return redirect('/products/products')
 
 def qty_change(request):
 		qty=request.GET.get('qty')
