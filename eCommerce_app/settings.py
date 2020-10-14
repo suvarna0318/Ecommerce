@@ -144,9 +144,32 @@ EMAIL_PORT=587
 EMAIL_HOST_USER=os.environ.get('db_user')
 EMAIL_HOST_PASSWORD='portfolio@123'
 
-IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 
 # STRIPE_SECRET_KEY='sk_test_51HYuvnJiWC4zUCzQkT8th2jyyJTae0LbDfNEZp203OqrBJa0R1LQm4xWq2QGVS67lmqVUmMa1VQR3YU1pbfHMvq0005QwA75X2'
 # STRIPE_PUBLISHABLE_KEY='pk_test_51HYuvnJiWC4zUCzQU7slNKm6xMtqkyNXNIu3wocpPlYSBxR9s3IhJ2u86iMxrFdMx3MN7pad6QVEg5LPIYVrkKyz00GXme9yjL'
 django_heroku.settings(locals())
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
