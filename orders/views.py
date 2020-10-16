@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 import stripe
 from django.conf import settings
 from django.contrib import messages
-stripe.api_key='sk_test_B3Z1YvMT6Ve2uDSWFnjVNEod00OXtlkHa8'
+stripe.api_key=' '
 
 
 
