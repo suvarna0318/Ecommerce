@@ -164,8 +164,7 @@ def delivery_address(request):
     return render(request,"orders/payment.html",context)
         
 def payment(request):
-    # result = request.GET.get('total', None)
-    # print("result from ajax",result)
+
     cart_id=request.session.get('cart_id',None)
     add_obj=None
     cart=Cart.objects.get(id=cart_id)

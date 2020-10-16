@@ -2,7 +2,7 @@ from django.shortcuts import render
 from products.models import Product
 from django.views.generic import ListView
 
-# Create your views here.
+
 def search(request):
 	
 	query=request.GET.get('q')	
