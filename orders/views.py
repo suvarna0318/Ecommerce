@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Order
+from .models import Order,OrderHistory
 from cart.models import Cart
 from users.models import Address
 from users.forms import AddressForm
@@ -9,13 +9,14 @@ from django.conf import settings
 from django.contrib import messages
 stripe.api_key='sk_test_B3Z1YvMT6Ve2uDSWFnjVNEod00OXtlkHa8'
 
+
+
 def order_display(request):
+    order_obj=Order.objects.filter(users=request.user).last()
+    print("last:",order_obj)
     
+    return render(request,'orders/order_view.html',context={'products':order_obj.cart.products.all(),})
 
-    return render(request,'orders/order_view.html',context={'user':request.user,})
-
-   
-    
 
 
 def coupen_apply(request):
@@ -38,9 +39,8 @@ def coupen_apply(request):
             
             coupen_amt=coupen_obj.amt
             print("cart obj:",cart_obj.sub_total,cart_obj.total)
-            cart_obj.total=total_amt
+            cart_obj.total+=total_amt
             cart_obj.save()
-
 
             print("cart obj:",cart_obj.sub_total,cart_obj.total)
             
@@ -68,7 +68,7 @@ def coupen_apply(request):
 
 @login_required
 def checkout(request):
-
+  
     cart_id=request.session.get('cart_id',None)
     add_obj=None
     cart=Cart.objects.get(id=cart_id)
@@ -82,7 +82,7 @@ def checkout(request):
         print("exit order",order_obj)
     else:
         
-        order_obj=Order.objects.create(cart=cart,status="created",total=cart.total)
+        order_obj=Order.objects.create(cart=cart,status="created",users=request.user,total=cart.total)
     
     try:
         add_obj=Address.objects.get(user=request.user)
@@ -157,6 +157,13 @@ def delivery_address(request):
 def payment(request):
     # result = request.GET.get('total', None)
     # print("result from ajax",result)
+    cart_id=request.session.get('cart_id',None)
+    add_obj=None
+    cart=Cart.objects.get(id=cart_id)
+
+    order_obj=Order.objects.filter(cart=cart_id)
+    print("order amt t pay:",order_obj)
+
     if request.method=='POST':
         print('Data:', request.POST)
         print(request.POST['stripeToken'])
@@ -175,7 +182,7 @@ def payment(request):
         cart_id=request.session.get('cart_id',None)
         # cart=Cart.objects.get(id=cart_id)
         order_obj=Order.objects.get(cart=cart_id)
-    
+        print("order amt t pay:",order_obj)
         order_obj.status="paid"
         order_obj.save()
         del request.session['cart_id']
@@ -196,7 +203,7 @@ def cash_on_delivery(request):
         cart_id=request.session.get('cart_id',None)
         cart=Cart.objects.get(id=cart_id)
         order_obj=Order.objects.get(cart=cart_id)
-    
+        print("order amt t pay:",order_obj)
         order_obj.status="cash"
         order_obj.save()
         

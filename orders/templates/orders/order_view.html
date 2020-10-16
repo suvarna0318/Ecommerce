@@ -2,11 +2,56 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block main %}
-
+{% if not products %}
 <div class="offset-3 col-lg-6 col-sm-6">
-    <h2 class="mb-3 mt-3">User:{{user}}</h2>
-<h4>this page is under working</h4>
-
+    <h2 class="mb-3 mt-3">You don't have any order</h2>
 </div>
+
+
+{% else %}
+
+ <section class="shoping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__table">
+                    	<h3 class="mt-4 mb-4">Your last Order</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="shoping__product">Products</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for prod in products %}
+                                <tr>
+                                    <td class="shoping__cart__item">
+                                        <img src="{{prod.image.url}}" style="width:80px;height:80px;" alt="">
+                                        <h5>{{prod.title}}</h5>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                        ₹{{prod.price}}
+                                    </td>
+
+
+                                    <td class="shoping__cart__total">
+                                        {{prod.qty}}
+                                    </td>
+                                    
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </section>
+    {% endif %}
 
 {% endblock %}
