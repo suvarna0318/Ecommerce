@@ -38,6 +38,7 @@ def profile(request):
 	return render(request,'users/profile.html',context)
 
 def contact(request):
+	print("contact page")
 	return render(request,'users/contact.html')
 
 def about(request):
