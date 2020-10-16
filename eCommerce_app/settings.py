@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'x$x(e##_2_kraltt5_==bw_@$=nbho$_oa9#*dhk6ibio=vuvz'
+SECRET_KEY = config('s_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -141,10 +142,8 @@ EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_USE_TLS=True
 EMAIL_PORT=587
-EMAIL_HOST_USER='*********'
-EMAIL_HOST_PASSWORD='**********'
-
-IMPORT_EXPORT_USE_TRANSACTIONS = True
+EMAIL_HOST_USER=config('email')
+EMAIL_HOST_PASSWORD=config('password')
 
 
 # STRIPE_SECRET_KEY='sk_test_51HYuvnJiWC4zUCzQkT8th2jyyJTae0LbDfNEZp203OqrBJa0R1LQm4xWq2QGVS67lmqVUmMa1VQR3YU1pbfHMvq0005QwA75X2'

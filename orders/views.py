@@ -7,16 +7,26 @@ from django.contrib.auth.decorators import login_required
 import stripe
 from django.conf import settings
 from django.contrib import messages
-stripe.api_key=' '
+from decouple import config
+stripe.api_key=config('secreat_api_key')
+public_api_key=config('public_api_key')
 
 
 
 def order_display(request):
     order_obj=Order.objects.filter(users=request.user).last()
     print("last:",order_obj)
-    
-    return render(request,'orders/order_view.html',context={'products':order_obj.cart.products.all(),})
+    if order_obj:
+        context={
+        'products':order_obj.cart.products.all(),
+        }
+    else:
+        context={
 
+        }
+    return render(request,'orders/order_view.html',context)
+def select_paymenet_method(request):
+    return render(request,'orders/payment_methods_selection.html')
 
 
 def coupen_apply(request):
@@ -38,11 +48,11 @@ def coupen_apply(request):
             total_amt=cart_obj.total-coupen_obj.amt
             
             coupen_amt=coupen_obj.amt
-            print("cart obj:",cart_obj.sub_total,cart_obj.total)
+          
             cart_obj.total+=total_amt
             cart_obj.save()
 
-            print("cart obj:",cart_obj.sub_total,cart_obj.total)
+            
             
             context={
             'products':products,
@@ -51,7 +61,7 @@ def coupen_apply(request):
             'total':total_amt,
             }
             
-            print(coupen_obj.amt,coupen_obj.active)
+            
             messages.success(request,'Applied')
             return render(request,'cart/cart_home.html',context)
 
@@ -86,9 +96,6 @@ def checkout(request):
     
     try:
         add_obj=Address.objects.get(user=request.user)
-
-        # print(add_obj.city)
-        # print(add_obj.city)
     except:
         
         print("create new address")
@@ -149,10 +156,11 @@ def update_address(request):
     return render(request,'orders/update_address.html',context)
 
 def delivery_address(request):
-    # context={
-    # 'api_key':stripe.api_key,
-    # }
-    return render(request,"orders/payment.html")
+    context={
+    'api_key':stripe.api_key,
+    'public_api_key':public_api_key,
+    }
+    return render(request,"orders/payment.html",context)
         
 def payment(request):
     # result = request.GET.get('total', None)
@@ -168,15 +176,16 @@ def payment(request):
         print('Data:', request.POST)
         print(request.POST['stripeToken'])
 
-        customer=stripe.Customer.create(
+        # customer=stripe.Customer.create(
             
-            source=request.POST['stripeToken']
-        )
+        #     source=request.POST['stripeToken']
+        # )
+        amt=8000
         charge=stripe.Charge.create(
-            customer=customer,
-            amount=1000*100,
+           
+            amount=amt,
             currency='usd',
-            # source=request.POST['stripeToken']
+            source=request.POST['stripeToken']
 
         )
         cart_id=request.session.get('cart_id',None)

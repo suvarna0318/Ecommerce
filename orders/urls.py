@@ -8,6 +8,6 @@ urlpatterns = [
     path('delivery_address/', views.delivery_address,name='delivery_address'),
     path('payment/',views.payment,name='payment'),
     path('cash_on_delivery/',views.cash_on_delivery,name='cash_on_delivery'),
-    
+    path('select_paymenet_method/',views.select_paymenet_method,name="select_paymenet_method")
    
 ]
