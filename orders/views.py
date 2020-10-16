@@ -24,6 +24,7 @@ def order_display(request):
         context={
 
         }
+    print("your last order:")
     return render(request,'orders/order_view.html',context)
 def select_paymenet_method(request):
     return render(request,'orders/payment_methods_selection.html')
