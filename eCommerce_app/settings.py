@@ -146,6 +146,4 @@ EMAIL_HOST_USER=config('email')
 EMAIL_HOST_PASSWORD=config('password')
 
 
-# STRIPE_SECRET_KEY='sk_test_51HYuvnJiWC4zUCzQkT8th2jyyJTae0LbDfNEZp203OqrBJa0R1LQm4xWq2QGVS67lmqVUmMa1VQR3YU1pbfHMvq0005QwA75X2'
-# STRIPE_PUBLISHABLE_KEY='pk_test_51HYuvnJiWC4zUCzQU7slNKm6xMtqkyNXNIu3wocpPlYSBxR9s3IhJ2u86iMxrFdMx3MN7pad6QVEg5LPIYVrkKyz00GXme9yjL'
 django_heroku.settings(locals())

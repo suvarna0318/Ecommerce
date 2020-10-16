@@ -27,9 +27,9 @@ class ProductListView(ListView):
 	def get_context_data(self, *args, **kwargs):
 		context = super(ProductListView, self).get_context_data(*args, **kwargs)
 		category=Category.objects.all()
-		print("get context data")
+		
 		context['category'] = category
-		print(context)
+		# print(context)
 		return context
 
 	
@@ -48,22 +48,14 @@ class ProductDetailView(DetailView):
 		# print(context.products)
 		
 		return context
-	# def get_queryset(self,**kwargs):
-	# 	print("products:",Product.objects.all()[:5])
-	# 	return Product.objects.all()[:5]
-
 
 def show_category_product(request,name):
 	c = get_object_or_404(Category, name=name)
 	print("c:",c)
 
 	category=Category.objects.all()
-	# print()
-	# if category in ['Pooja Essentials','Beverages','Baby care']:
-	# 	unit="pcs"
-	# else:
-	# 	unit="Kg"
-	print(c)
+	
+
 	products = c.product_set.all() 
 	if products is None:
 		print("none")
