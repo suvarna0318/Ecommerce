@@ -8,7 +8,7 @@ import stripe
 from django.conf import settings
 from django.contrib import messages
 from decouple import config
-stripe.api_key=config('secreat_api_key')
+stripe.api_key=config('secret_api_key')
 public_api_key=config('public_api_key')
 
 
