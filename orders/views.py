@@ -7,9 +7,9 @@ from django.contrib.auth.decorators import login_required
 import stripe
 from django.conf import settings
 from django.contrib import messages
-from decouple import config
-stripe.api_key=config('secret_api_key')
-public_api_key=config('public_api_key')
+# from decouple import config
+stripe.api_key='sk_test_B3Z1YvMT6Ve2uDSWFnjVNEod00OXtlkHa8'
+public_api_key='pk_test_DB1nmFvhPpfS3uq2CDoV5e2T00ZKSuksTs'
 
 
 
@@ -207,8 +207,9 @@ def payment(request):
 
 def cash_on_delivery(request):
     if request.method == "POST":
-        radoption = str(request.POST["radoption"])
-
+        radoption = str(request.POST["radioption"])
+        if not radoption:
+            print("ur not selected")
         cart_id=request.session.get('cart_id',None)
         cart=Cart.objects.get(id=cart_id)
         order_obj=Order.objects.get(cart=cart_id)

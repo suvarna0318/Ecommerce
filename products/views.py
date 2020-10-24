@@ -11,7 +11,6 @@ def home(request):
 	
 	return render(request,'products/home.html',context={'category':category,})
 
-# Create your views here.
 
 class ProductListView(ListView):
 	model=Product

@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
-from decouple import config
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('secret_key')
+SECRET_KEY = 'laxmi2(^lz+gsyfsz(v@&&3advrl%&vvkzequp$m6)n*)gvsj&0cfsysuvarna'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'users.apps.UsersConfig',
     'search.apps.SearchConfig',
+    'storages',
    
     
 ]
@@ -133,7 +134,7 @@ STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 CRISPY_TEMPLATE_PACK='bootstrap4'
 
-LOGIN_REDIRECT_URL='/products/home/'
+LOGIN_REDIRECT_URL='/'
 LOGIN_URL='/users/login'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
@@ -142,8 +143,18 @@ EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_USE_TLS=True
 EMAIL_PORT=587
-EMAIL_HOST_USER=config('email')
-EMAIL_HOST_PASSWORD=config('password')
+EMAIL_HOST_USER=os.environ.get('db_user')
+EMAIL_HOST_PASSWORD=os.environ.get('db_pass')
 
+AWS_ACCESS_KEY_ID='AKIAVTQAHAZEM5HZFSMP'
+AWS_SECRET_ACCESS_KEY='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'
+AWS_STORAGE_BUCKET_NAME='suvarna-bucket'
+AWS_S3_CUSTOM_DOMAIN = AWS_STORAGE_BUCKET_NAME +'.s3.amazonaws.com'
+
+
+
+AWS_S3_FILE_OVERWRITE=False
+AWS_DEFAULT_ACL=None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 django_heroku.settings(locals())

@@ -63,7 +63,8 @@
   <form action="{% url 'cash_on_delivery' %}" method="POST" >
     {% csrf_token %}
     <div class="header__top__right__language"> 
-        <div>Cash on delivery</div>            
+      <input type="radio" name="radioption" id="radio">
+        <label for="radio">Cash on delivery</label>           
     </div>
 
    <div>
