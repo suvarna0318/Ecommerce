@@ -21,4 +21,7 @@ stripe==2.54.0
 six==1.12.0
 urllib3==1.23
 whitenoise==4.1.2
+<<<<<<< HEAD
 python-decouple==3.1
+=======
+>>>>>>> 122d187121334706ff0a21b00a788a78aa6e2c42

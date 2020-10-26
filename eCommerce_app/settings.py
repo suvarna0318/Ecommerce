@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
+import socket
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -25,11 +26,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'laxmi2(^lz+gsyfsz(v@&&3advrl%&vvkzequp$m6)n*)gvsj&0cfsysuvarna'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['apna-grocery-1.herokuapp.com']
 
 
+
+if socket.gethostname() == "server_name":
+    DEBUG = False
+    ALLOWED_HOSTS = ["apna-grocery-1.herokuapp.com",]
+    ...
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1",]
 # Application definition
 
 INSTALLED_APPS = [
@@ -146,6 +155,17 @@ EMAIL_PORT=587
 EMAIL_HOST_USER=os.environ.get('db_user')
 EMAIL_HOST_PASSWORD=os.environ.get('db_pass')
 
+AWS_ACCESS_KEY_ID='AKIAVTQAHAZEM5HZFSMP'
+AWS_SECRET_ACCESS_KEY='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'
+AWS_STORAGE_BUCKET_NAME='suvarna-bucket'
+AWS_S3_CUSTOM_DOMAIN = AWS_STORAGE_BUCKET_NAME +'.s3.amazonaws.com'
+
+
+
+AWS_S3_FILE_OVERWRITE=False
+AWS_DEFAULT_ACL=None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 django_heroku.settings(locals())
+
